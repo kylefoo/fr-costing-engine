@@ -125,7 +125,7 @@ export default function SizeCheckerPage() {
               {entries.length} file{entries.length !== 1 ? 's' : ''}
               {isProcessing && ' · Analyzing…'}
               {!isProcessing && doneCount > 0 && (
-                <> · <span className="text-green-600 dark:text-green-400">{passCount} passed</span>
+                <> · <span className="text-green-600 dark:text-green-400">{passCount} analyzed</span>
                 {passCount < doneCount && <>, <span className="text-destructive">{doneCount - passCount} failed</span></>}</>
               )}
             </span>
