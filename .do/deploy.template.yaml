@@ -1,10 +1,10 @@
 spec:
-  name: sample-nextjs
+  name: fr-costing-engine
   services:
   - environment_slug: node-js
     git:
       branch: main
-      repo_clone_url: https://github.com/digitalocean/sample-nextjs.git
+      repo_clone_url: https://github.com/kylefoo/fr-costing-engine
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-0.5gb
-    name: sample-nextjs
+    name: fr-costing-engine

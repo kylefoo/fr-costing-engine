@@ -28,14 +28,14 @@ export function ResultsPanel({ result }: Props) {
     <div className="flex flex-col gap-6">
       <div className="flex items-center gap-3">
         <h2 className="text-lg font-semibold text-foreground">Result</h2>
-        <Badge
+        {/* <Badge
           variant={pass ? 'default' : 'destructive'}
           className={pass ? 'bg-green-600 text-white dark:bg-green-600' : undefined}
         >
           {pass ? 'PASS' : 'FAIL'}
-        </Badge>
+        </Badge> */}
         {paperSize && (
-          <Badge variant="default" className="bg-blue-600 text-white dark:bg-blue-600">
+          <Badge variant="default" className="bg-green-600 text-white dark:bg-green-600">
             {paperSize}
           </Badge>
         )}

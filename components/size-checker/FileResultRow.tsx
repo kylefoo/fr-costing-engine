@@ -74,16 +74,16 @@ export function FileResultRow({ entry }: Props) {
         {entry.status === 'done' && (
           <div className="flex items-center gap-2 shrink-0">
             {paperSize && (
-              <Badge variant="default" className="bg-blue-600 text-white dark:bg-blue-600">
+              <Badge variant="default" className="bg-green-600 text-white dark:bg-green-600">
                 {paperSize}
               </Badge>
             )}
-            <Badge
+            {/* <Badge
               variant={entry.result.pass ? 'default' : 'destructive'}
               className={entry.result.pass ? 'bg-green-600 text-white dark:bg-green-600' : undefined}
             >
               {entry.result.pass ? 'PASS' : 'FAIL'}
-            </Badge>
+            </Badge> */}
             {issueLabel && (
               <span className="text-xs text-muted-foreground">{issueLabel}</span>
             )}

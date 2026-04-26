@@ -1,8 +1,8 @@
-name: sample-nextjs
+name: fr-costing-engine
 services:
 - environment_slug: node-js
   github:
     branch: main
     deploy_on_push: true
-    repo: digitalocean/sample-nextjs
-  name: sample-nextjs
+    repo: kylefoo/fr-costing-engine
+  name: fr-costing-engine

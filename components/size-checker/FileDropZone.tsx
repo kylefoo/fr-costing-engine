@@ -81,8 +81,8 @@ export function FileDropZone({ onFiles, onError, disabled }: Props) {
         'cursor-pointer transition-colors outline-none',
         'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
         dragging
-          ? 'border-primary bg-primary/5'
-          : 'border-border hover:border-primary/50 hover:bg-muted/30',
+          ? 'border-primary bg-primary/10'
+          : 'border-border bg-muted/20 hover:border-primary/50 hover:bg-muted/50',
         disabled && 'opacity-50 pointer-events-none',
       )}
       onClick={() => inputRef.current?.click()}
