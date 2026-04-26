@@ -4,7 +4,7 @@ import {
   TableHeader, TableRow,
 } from '@/components/ui/table';
 import type { AnalysisResult } from '@/lib/pdfium/types';
-import { ptToMm } from '@/lib/pdfium/analyzer';
+import { ptToMm, detectPaperSize } from '@/lib/pdfium/analyzer';
 
 const SEVERITY_CLASS: Record<string, string> = {
   error:   'text-destructive',
@@ -19,13 +19,26 @@ interface Props {
 export function ResultsPanel({ result }: Props) {
   const { boxes, issues, pass } = result;
 
+  const trim  = boxes.find((b) => b.name === 'TrimBox');
+  const media = boxes.find((b) => b.name === 'MediaBox')!;
+  const sizeBox = (trim?.defined ? trim : media);
+  const paperSize = detectPaperSize(ptToMm(sizeBox.width), ptToMm(sizeBox.height));
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center gap-3">
         <h2 className="text-lg font-semibold text-foreground">Result</h2>
-        <Badge variant={pass ? 'default' : 'destructive'}>
+        <Badge
+          variant={pass ? 'default' : 'destructive'}
+          className={pass ? 'bg-green-600 text-white dark:bg-green-600' : undefined}
+        >
           {pass ? 'PASS' : 'FAIL'}
         </Badge>
+        {paperSize && (
+          <Badge variant="default" className="bg-blue-600 text-white dark:bg-blue-600">
+            {paperSize}
+          </Badge>
+        )}
       </div>
 
       <div>

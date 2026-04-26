@@ -12,6 +12,44 @@ export function ptToMm(pt: number): number {
   return Math.round(pt * 0.352778 * 100) / 100;
 }
 
+const PAPER_SIZES: Array<{ name: string; w: number; h: number }> = [
+  { name: 'A0',      w: 841,   h: 1189  },
+  { name: 'A1',      w: 594,   h: 841   },
+  { name: 'A2',      w: 420,   h: 594   },
+  { name: 'A3',      w: 297,   h: 420   },
+  { name: 'A4',      w: 210,   h: 297   },
+  { name: 'A5',      w: 148,   h: 210   },
+  { name: 'A6',      w: 105,   h: 148   },
+  { name: 'B4',      w: 250,   h: 353   },
+  { name: 'B5',      w: 176,   h: 250   },
+  { name: 'Letter',  w: 215.9, h: 279.4 },
+  { name: 'Legal',   w: 215.9, h: 355.6 },
+  { name: 'Tabloid', w: 279.4, h: 431.8 },
+];
+
+const PAPER_SIZE_TOLERANCE_MM = 2;
+
+/**
+ * Returns the standard paper size name (e.g. "A4") for the given dimensions,
+ * or null if no known size matches within PAPER_SIZE_TOLERANCE_MM.
+ * Orientation-agnostic: portrait and landscape both match.
+ */
+export function detectPaperSize(widthMm: number, heightMm: number): string | null {
+  const wMin = Math.min(widthMm, heightMm);
+  const wMax = Math.max(widthMm, heightMm);
+  for (const size of PAPER_SIZES) {
+    const sMin = Math.min(size.w, size.h);
+    const sMax = Math.max(size.w, size.h);
+    if (
+      Math.abs(wMin - sMin) <= PAPER_SIZE_TOLERANCE_MM &&
+      Math.abs(wMax - sMax) <= PAPER_SIZE_TOLERANCE_MM
+    ) {
+      return size.name;
+    }
+  }
+  return null;
+}
+
 /**
  * Returns true if `inner` is fully contained within `outer`,
  * allowing for TOLERANCE_PT rounding on all four edges.

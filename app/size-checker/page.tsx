@@ -1,18 +1,17 @@
 'use client';
 
-import { useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import { useState, useRef, useCallback } from 'react';
 import { FileDropZone } from '@/components/size-checker/FileDropZone';
-import { AnalysisCanvas } from '@/components/size-checker/AnalysisCanvas';
-import { ResultsPanel } from '@/components/size-checker/ResultsPanel';
+import { FileResultRow } from '@/components/size-checker/FileResultRow';
 import { analyzeFile } from '@/lib/pdfium/analyzer';
 import type { AnalysisResult } from '@/lib/pdfium/types';
+import type { FilePayload } from '@/components/size-checker/FileDropZone';
 
-type PageState =
-  | { status: 'idle' }
-  | { status: 'loading'; label: string }
-  | { status: 'done'; result: AnalysisResult; filename: string }
-  | { status: 'error'; message: string };
+export type FileEntry =
+  | { id: string; filename: string; status: 'queued' }
+  | { id: string; filename: string; status: 'loading'; label: string }
+  | { id: string; filename: string; status: 'done'; result: AnalysisResult }
+  | { id: string; filename: string; status: 'error'; message: string };
 
 function classifyError(err: unknown): string {
   const msg = err instanceof Error ? err.message : String(err);
@@ -29,70 +28,121 @@ function classifyError(err: unknown): string {
 }
 
 export default function SizeCheckerPage() {
-  const [state, setState] = useState<PageState>({ status: 'idle' });
+  const [entries, setEntries] = useState<FileEntry[]>([]);
+  const [dropError, setDropError] = useState<string | null>(null);
 
-  async function handleFile(buffer: ArrayBuffer, filename: string) {
-    try {
-      // Phase 1: warm up pdfium (triggers WASM download on first use)
-      setState({ status: 'loading', label: 'Loading analysis engine…' });
-      const { getPdfiumLibrary } = await import('@/lib/pdfium/loader');
-      await getPdfiumLibrary();
+  // Queue holds buffers (not kept in React state to avoid re-render cost)
+  const queueRef = useRef<Array<{ id: string; buffer: ArrayBuffer; filename: string }>>([]);
+  const processingRef = useRef(false);
 
-      // Phase 2: run analysis
-      setState({ status: 'loading', label: 'Analyzing file…' });
-      const result = await analyzeFile(buffer);
+  const processQueue = useCallback(async () => {
+    if (processingRef.current) return;
+    processingRef.current = true;
 
-      setState({ status: 'done', result, filename });
-    } catch (err) {
-      setState({ status: 'error', message: classifyError(err) });
+    while (queueRef.current.length > 0) {
+      const item = queueRef.current.shift()!;
+
+      setEntries((prev) => prev.map((e) =>
+        e.id === item.id
+          ? { id: e.id, filename: e.filename, status: 'loading', label: 'Loading analysis engine…' }
+          : e,
+      ));
+
+      try {
+        const { getPdfiumLibrary } = await import('@/lib/pdfium/loader');
+        await getPdfiumLibrary();
+
+        setEntries((prev) => prev.map((e) =>
+          e.id === item.id
+            ? { id: e.id, filename: e.filename, status: 'loading', label: 'Analyzing file…' }
+            : e,
+        ));
+
+        const result = await analyzeFile(item.buffer);
+
+        setEntries((prev) => prev.map((e) =>
+          e.id === item.id
+            ? { id: e.id, filename: e.filename, status: 'done', result }
+            : e,
+        ));
+      } catch (err) {
+        setEntries((prev) => prev.map((e) =>
+          e.id === item.id
+            ? { id: e.id, filename: e.filename, status: 'error', message: classifyError(err) }
+            : e,
+        ));
+      }
     }
+
+    processingRef.current = false;
+  }, []);
+
+  function handleFiles(files: FilePayload[]) {
+    setDropError(null);
+    const newEntries: FileEntry[] = files.map((f) => ({
+      id: crypto.randomUUID(),
+      filename: f.filename,
+      status: 'queued',
+    }));
+
+    setEntries((prev) => [...prev, ...newEntries]);
+
+    files.forEach((f, i) => {
+      queueRef.current.push({ id: newEntries[i].id, buffer: f.buffer, filename: f.filename });
+    });
+
+    processQueue();
   }
+
+  const isProcessing = entries.some((e) => e.status === 'queued' || e.status === 'loading');
+  const doneCount = entries.filter((e) => e.status === 'done').length;
+  const passCount = entries.filter((e) => e.status === 'done' && (e as Extract<FileEntry, { status: 'done' }>).result.pass).length;
 
   return (
     <main className="max-w-screen-xl mx-auto px-4 py-8">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-foreground">Size Checker</h1>
         <p className="text-muted-foreground mt-1">
-          Upload a PDF or Illustrator file to verify its page boxes are correct for print production.
+          Upload PDF or Illustrator files to verify their page boxes are correct for print production.
         </p>
       </div>
 
       <FileDropZone
-        onFile={handleFile}
-        onError={(message) => setState({ status: 'error', message })}
-        disabled={state.status === 'loading'}
+        onFiles={handleFiles}
+        onError={(msg) => setDropError(msg)}
       />
 
-      {state.status === 'loading' && (
-        <div className="flex items-center gap-2 mt-6 text-muted-foreground">
-          <Loader2 className="animate-spin size-4" />
-          <span className="text-sm">{state.label}</span>
+      {dropError && (
+        <div className="mt-3 p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm">
+          {dropError}
         </div>
       )}
 
-      {state.status === 'error' && (
-        <div className="mt-6 p-4 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm">
-          {state.message}
-        </div>
-      )}
-
-      {state.status === 'done' && (
-        <>
-          <p className="mt-4 text-sm text-muted-foreground">
-            File: <span className="font-medium text-foreground">{state.filename}</span>
-            {' · '}
+      {entries.length > 0 && (
+        <div className="mt-6">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-sm text-muted-foreground">
+              {entries.length} file{entries.length !== 1 ? 's' : ''}
+              {isProcessing && ' · Analyzing…'}
+              {!isProcessing && doneCount > 0 && (
+                <> · <span className="text-green-600 dark:text-green-400">{passCount} passed</span>
+                {passCount < doneCount && <>, <span className="text-destructive">{doneCount - passCount} failed</span></>}</>
+              )}
+            </span>
             <button
-              className="underline underline-offset-2 hover:text-foreground transition-colors"
-              onClick={() => setState({ status: 'idle' })}
+              className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              onClick={() => setEntries([])}
+              disabled={isProcessing}
             >
-              Upload another file
+              Clear all
             </button>
-          </p>
-          <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            <AnalysisCanvas result={state.result} />
-            <ResultsPanel result={state.result} />
           </div>
-        </>
+          <div className="flex flex-col gap-2">
+            {entries.map((entry) => (
+              <FileResultRow key={entry.id} entry={entry} />
+            ))}
+          </div>
+        </div>
       )}
     </main>
   );

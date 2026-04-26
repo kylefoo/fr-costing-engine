@@ -20,7 +20,7 @@ All analysis runs entirely client-side (required by the static export constraint
 ## Scope
 
 - **In scope:** Single-page analysis (page 1 only), `.pdf` and `.ai` inputs, box consistency checks, bleed fill heuristic, annotated canvas preview, top navigation shell for future tools.
-- **Out of scope for v1:** Multi-page analysis, CMYK color space inspection, font embedding checks, ICC profile validation.
+- **Out of scope for v1:** Multi-page analysis, CMYK color space inspection, font embedding checks, ICC profile validation, CutContour/Dieline spot color path detection (used for sticker sheets and die-cut jobs — the TrimBox on a sticker sheet describes the outer sheet boundary only; individual cut shapes live in PDF content streams as spot color paths, not in box metadata).
 
 ---
 
