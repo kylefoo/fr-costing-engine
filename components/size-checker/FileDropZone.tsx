@@ -32,6 +32,9 @@ export function FileDropZone({ onFile, onError, disabled }: Props) {
         onFile(e.target.result, file.name);
       }
     };
+    reader.onerror = () => {
+      onError('Could not read the file. Please try again.');
+    };
     reader.readAsArrayBuffer(file);
   }
 
@@ -57,9 +60,13 @@ export function FileDropZone({ onFile, onError, disabled }: Props) {
         disabled && 'opacity-50 pointer-events-none',
       )}
       onClick={() => inputRef.current?.click()}
-      onKeyDown={(e) => e.key === 'Enter' && inputRef.current?.click()}
+      onKeyDown={(e) => !disabled && e.key === 'Enter' && inputRef.current?.click()}
       onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
-      onDragLeave={() => setDragging(false)}
+      onDragLeave={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+            setDragging(false);
+          }
+        }}
       onDrop={onDrop}
     >
       <UploadCloud className="size-10 text-muted-foreground" />

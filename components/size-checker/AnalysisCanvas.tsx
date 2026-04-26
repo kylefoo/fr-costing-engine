@@ -70,7 +70,7 @@ export function AnalysisCanvas({ result }: Props) {
       <canvas
         ref={canvasRef}
         className="max-w-full block"
-        style={{ imageRendering: 'pixelated' }}
+        style={{ imageRendering: 'crisp-edges' }}
       />
     </div>
   );

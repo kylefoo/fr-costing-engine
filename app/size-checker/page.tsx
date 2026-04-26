@@ -79,7 +79,7 @@ export default function SizeCheckerPage() {
       {state.status === 'done' && (
         <>
           <p className="mt-4 text-sm text-muted-foreground">
-            Analyzing: <span className="font-medium text-foreground">{state.filename}</span>
+            File: <span className="font-medium text-foreground">{state.filename}</span>
             {' · '}
             <button
               className="underline underline-offset-2 hover:text-foreground transition-colors"
