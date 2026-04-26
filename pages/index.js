@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import backgroundImage from '../public/background.jpg'
 
 export default function Home() {
   return (
@@ -43,7 +44,7 @@ export default function Home() {
         </svg>
 
         <Image
-          src="background.jpg"
+          src={backgroundImage}
           alt="Ocean Image"
           className="lg:absolute object-cover lg:inset-y-0 lg:right-0 lg:h-full lg:w-full"
         />
