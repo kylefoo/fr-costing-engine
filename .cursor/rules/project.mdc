@@ -1,0 +1,59 @@
+---
+description: Tech stack, structure, and commands for fr-costing-engine
+alwaysApply: true
+---
+
+# fr-costing-engine
+
+Next.js 15 App Router app, exported as a static site for DigitalOcean App Platform.
+
+## Tech stack
+
+- **Next.js** 15 (App Router only — no `pages/`)
+- **React** 19
+- **TypeScript** 5 (strict)
+- **Tailwind CSS** v4 (PostCSS plugin, OKLCH CSS variables)
+- **shadcn/ui** — style: `new-york`, base color: `zinc`
+- **Icons**: `lucide-react`
+- **Package manager**: Yarn 1 (use `yarn`, never `npm`)
+- **Node**: ≥22.12 (pinned to `22.22.2` in `.nvmrc`)
+
+## Structure
+
+- `app/` — App Router pages, layouts, `globals.css`
+- `components/ui/` — shadcn primitives (vendored; edit thoughtfully)
+- `components/` — other app components
+- `lib/utils.ts` — exports `cn()` (clsx + tailwind-merge)
+- `public/` — static assets (e.g. `background.jpg`)
+- `_static/` — build output (consumed by `serve` at runtime)
+- `sammy.js` — DigitalOcean ASCII banner; runs on `yarn start`
+- Configs: `next.config.js`, `tsconfig.json`, `eslint.config.mjs` (flat, ESLint v9), `postcss.config.mjs`, `components.json`
+
+## Imports
+
+- Path alias `@/*` → repo root. Prefer `@/components/...`, `@/lib/utils`.
+- For images, **static-import** so Next.js can infer dimensions:
+  ```tsx
+  import bg from "@/public/bg.jpg"
+  <Image src={bg} alt="..." />
+  ```
+
+## Commands
+
+- `yarn dev` — dev server (port 3000)
+- `yarn build` — produces static export in `_static/`
+- `yarn start` — runs banner + `serve _static/` on `$PORT` (default 8080)
+- `yarn lint` — ESLint (flat config)
+
+## Constraints
+
+- `output: 'export'` is enabled — **no API routes, no server actions, no middleware mutations, no `dynamic = 'force-dynamic'`**.
+- `images.unoptimized: true` — required by static export.
+- Do not create `pages/` — App Router only.
+- Do not edit `next-env.d.ts` (Next.js manages it; it's lint-ignored).
+
+## Conventions
+
+- Use `next/font/google` for fonts (Inter is already wired in `app/layout.tsx`). Never `<link>` to Google Fonts.
+- Use semantic Tailwind tokens (`bg-primary`, `text-foreground`, `border-border`) over raw colors (`bg-blue-500`) — see `app/globals.css`.
+- Add shadcn components via: `yarn dlx shadcn@latest add <name>`.

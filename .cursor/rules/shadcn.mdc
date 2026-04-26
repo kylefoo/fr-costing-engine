@@ -1,0 +1,59 @@
+---
+description: shadcn/ui conventions for adding, using, and customizing components
+globs: components/**/*.{ts,tsx},app/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# shadcn/ui usage
+
+shadcn components are vendored into `components/ui/`. Treat them as **owned source code** — read and edit freely, but follow these conventions.
+
+## Adding components
+
+Use the CLI (config lives in `components.json`):
+
+```bash
+yarn dlx shadcn@latest add <component>
+# e.g. yarn dlx shadcn@latest add card dialog input label form
+```
+
+Drops files into `components/ui/` using the `new-york` style and `zinc` palette.
+
+## Using components
+
+Always import via the `@/` alias:
+
+```tsx
+import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+```
+
+For polymorphic rendering (wrap a Button around a `Link` or `<a>`), use `asChild`:
+
+```tsx
+<Button asChild>
+  <Link href="/foo">Go</Link>
+</Button>
+```
+
+Merge classes with `cn()`, never raw template strings:
+
+```tsx
+<div className={cn("flex gap-2", isActive && "bg-primary")} />
+```
+
+## Theming
+
+- Colors come from CSS variables in `app/globals.css` (`--primary`, `--background`, `--muted-foreground`, etc.).
+- Use semantic Tailwind classes: `bg-primary`, `text-foreground`, `border-border`. Avoid raw color classes (`bg-blue-500`) unless intentionally going off-theme.
+- Dark mode: add `class="dark"` to `<html>` (or use a theme provider). The `.dark { ... }` block in `globals.css` takes over.
+
+## Variants
+
+shadcn components use `class-variance-authority` (cva). To add a variant, edit the `cva` block in the component file — don't override at call sites with sprawling className strings.
+
+## Don'ts
+
+- Don't import Radix primitives directly from `node_modules` — go through `components/ui/` wrappers.
+- Don't re-add a component from the CLI if you've customized it — it overwrites.
+- Don't use Tailwind v3 syntax (`@layer` in `tailwind.config.js`). We're on v4 — config lives in `app/globals.css` via `@theme inline { ... }`.
