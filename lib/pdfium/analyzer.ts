@@ -176,15 +176,17 @@ export async function analyzeFile(buffer: ArrayBuffer): Promise<AnalysisResult> 
   // --- Page rendering (pdfium) ---
   const library = await getPdfiumLibrary();
   const document = await library.loadDocument(new Uint8Array(buffer));
-  const page = document.getPage(0);
-
-  const renderResult = await page.render({
-    scale: RENDER_SCALE,
-    render: 'bitmap',
-    // colorSpace defaults to 'BGRA'
-  });
-
-  document.destroy();
+  let renderResult!: Awaited<ReturnType<typeof page.render>>;
+  try {
+    const page = document.getPage(0);
+    renderResult = await page.render({
+      scale: RENDER_SCALE,
+      render: 'bitmap',
+      // colorSpace defaults to 'BGRA'
+    });
+  } finally {
+    document.destroy();
+  }
 
   const rendered: RenderedPage = {
     data: renderResult.data,

@@ -12,7 +12,10 @@ export async function getPdfiumLibrary(): Promise<PDFiumLibraryType> {
     libraryPromise = (async () => {
       const { PDFiumLibrary } = await import('@hyzyla/pdfium');
       return PDFiumLibrary.init();
-    })();
+    })().catch((err) => {
+      libraryPromise = null; // clear so the next call can retry
+      throw err;
+    });
   }
   return libraryPromise;
 }
