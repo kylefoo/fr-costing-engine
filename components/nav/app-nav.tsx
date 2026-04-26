@@ -14,7 +14,9 @@ export function AppNav() {
   return (
     <nav className="border-b border-border bg-background">
       <div className="max-w-screen-xl mx-auto px-4 flex items-center gap-6 h-14">
-        <span className="font-semibold text-foreground tracking-tight">Fastroll</span>
+        <Link href="/" className="font-semibold text-foreground tracking-tight hover:opacity-75 transition-opacity">
+          Fastroll
+        </Link>
         <div className="flex items-center gap-1">
           {tools.map((tool) => (
             <Link

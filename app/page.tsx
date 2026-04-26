@@ -7,24 +7,24 @@ export default function Home() {
     <div className="min-h-screen lg:flex text-lg">
       <div className="lg:w-1/2 relative z-10 flex flex-col justify-center px-10 lg:px-20 py-20 lg:py-0 text-left">
         <h2 className="text-4xl mb-3 font-bold tracking-tight text-foreground">
-          Welcome to Your Next.js App{" "}
+          Fastroll AI Tools{" "}
           <span className="block text-primary text-2xl font-normal mt-1">
-            Deployed to DigitalOcean
+            Work in progress
           </span>
         </h2>
 
         <p className="text-muted-foreground mb-6">
-          Deploy API routes, static frontend, databases, and more.
+          Size checker, Color analyzer, Cost calculator, and more.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-2">
           <Button asChild variant="secondary">
-            <a href="https://www.digitalocean.com/docs/app-platform">
-              View the Docs
+            <a href="/color-analyzer">
+              Color Analyzer (Coming soon)
             </a>
           </Button>
           <Button asChild>
-            <a href="https://cloud.digitalocean.com/apps">View Your Dashboard</a>
+            <a href="/size-checker">Size Checker</a>
           </Button>
         </div>
       </div>
