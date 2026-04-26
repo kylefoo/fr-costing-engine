@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "cp node_modules/@hyzyla/pdfium/dist/pdfium.wasm public/pdfium.wasm",
     "dev": "next dev",
     "build": "next build",
     "start": "node sammy.js; serve -s _static -l tcp://0.0.0.0:${PORT:-8080} -n",

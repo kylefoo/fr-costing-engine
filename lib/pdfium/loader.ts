@@ -11,7 +11,7 @@ export async function getPdfiumLibrary(): Promise<PDFiumLibraryType> {
   if (!libraryPromise) {
     libraryPromise = (async () => {
       const { PDFiumLibrary } = await import('@hyzyla/pdfium');
-      return PDFiumLibrary.init();
+      return PDFiumLibrary.init({ wasmUrl: '/pdfium.wasm' });
     })().catch((err) => {
       libraryPromise = null; // clear so the next call can retry
       throw err;
