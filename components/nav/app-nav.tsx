@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 
 const tools = [
   { label: 'Size Checker', href: '/size-checker' },
+  { label: 'Color Analyzer', href: '/#' },
 ];
 
 export function AppNav() {

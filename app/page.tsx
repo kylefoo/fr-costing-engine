@@ -1,6 +1,7 @@
 import Image from "next/image"
 import backgroundImage from "@/public/background.jpg"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -19,12 +20,12 @@ export default function Home() {
 
         <div className="flex flex-col sm:flex-row gap-2">
           <Button asChild variant="secondary">
-            <a href="/color-analyzer">
+            <a href="#">
               Color Analyzer (Coming soon)
             </a>
           </Button>
           <Button asChild>
-            <a href="/size-checker">Size Checker</a>
+            <Link href="/size-checker">Size Checker</Link>
           </Button>
         </div>
       </div>
