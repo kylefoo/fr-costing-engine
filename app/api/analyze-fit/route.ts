@@ -7,7 +7,7 @@
  *  1. Renders page 0 server-side via pdfium → BGRA bitmap
  *  2. Encodes it as a PNG data URL for the DeepSeek vision check
  *  3. Invokes the deepagents agent; the agent either calls `analyzeFile`
- *     (design fits edge) or skips it (white space detected)
+ *     (design fits edge) or skips it (design not fitted to page edge)
  *  4. Returns a serialised AnalysisResult; `rendered.dataUrl` carries the
  *     PNG so the client can display the page without re-rendering
  *
@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
 
   // Step 2: run the deep agent.
   // If the agent calls analyzeFile the result is captured via closure.
-  // If it detects white space it skips the tool — capture stays null.
+  // If it detects design is not fitted to page edge, it skips the tool — capture stays null.
   const { agent, getCapture, getSkipResult } = createDesignFitAgent(buffer);
 
   try {

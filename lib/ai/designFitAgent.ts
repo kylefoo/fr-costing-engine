@@ -2,7 +2,7 @@
  * Design-fit deep agent.
  *
  * Uses deepagents + OpenAI vision to decide whether the artwork in a PDF/AI
- * file fills the page edge (no surrounding white space).
+ * file is fitted to the page edge (no surrounding design specifications that are not part of the artwork).
  *
  * Two tools are available:
  *   analyzeFile       – called when design IS fitted to the edge (Step 2)
@@ -42,20 +42,22 @@ Examine the rendered page carefully.
 Ask yourself: does the artwork appear to be **fitted to the page edge**?
 Look for design elements or colors that are close to the page edges on all sides.
 If NO, the design is NOT fitted to the page edge.
+Look for dimention notes or label specifications that are not part of the artwork.
+If there are present, the design is NOT fitted to the page edge.
 
-- If the label design is **NOT fitted** to page edge (has surrounding white space margins):
+- If the design is **NOT fitted** to page edge:
   - Do NOT call the analyzeFile tool.
   - Proceed to Step 1B.
 
 ## Step 1B — Report the artwork area
 
-The design has white space margins. Look for dimension notes or labels inside
+The design is not fitted to the page edge. Look for dimension notes or labels inside
 the design (e.g. "105 × 148 mm", "3\" × 4\"", "Width: 90mm Height: 55mm").
 Convert any inch values to mm (1 inch = 25.4 mm).
 
 Call the \`reportSkipResult\` tool with:
   - reason: a one-sentence description of what you observed (e.g. "Design is a
-    scaled-down thumbnail centred on the page with white margins on all sides.")
+    scaled-down thumbnail centred on the page with label specifications that are not part of the artwork.")
   - detectedWidthMm: artwork width in mm if found (number only, no units)
   - detectedHeightMm: artwork height in mm if found (number only, no units)
 
@@ -79,7 +81,7 @@ export function createDesignFitAgent(buffer: ArrayBuffer) {
     name: 'analyzeFile',
     description:
       'Run full PDF/AI file analysis (PDF box checks, bleed coverage). ' +
-      'Call this ONLY when the design is confirmed to reach the page edge without surrounding white space.',
+      'Call this ONLY when the design is confirmed to reach the page edge without design specifications that are not part of the artwork.',
     schema: z.object({}),
     func: async () => {
       capturedResult = await analyzeFile(buffer, getPdfiumLibraryServer);
