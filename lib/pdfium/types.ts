@@ -23,8 +23,10 @@ export interface AnalysisIssue {
 
 /** Rendered page bitmap in BGRA format */
 export interface RenderedPage {
-  /** Raw pixel data: BGRA, 4 bytes per pixel */
-  data: Uint8Array;
+  /** Raw pixel data: BGRA, 4 bytes per pixel. Present when rendering in-browser. */
+  data?: Uint8Array;
+  /** Base64-encoded PNG data URL. Present when the result comes from the server API. */
+  dataUrl?: string;
   width: number;
   height: number;
   /** Scale factor used: pixels = PDF_points * scale */
@@ -37,4 +39,6 @@ export interface AnalysisResult {
   rendered: RenderedPage;
   /** true = zero 'error' severity issues; warnings do not affect pass/fail */
   pass: boolean;
+  /** true when the agent skipped analyzeFile because the design has surrounding white space */
+  analyzeFileSkipped?: boolean;
 }

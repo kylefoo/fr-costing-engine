@@ -1,5 +1,5 @@
 {
-  "name": "hello-next",
+  "name": "ai-fastroll",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "postinstall": "cp node_modules/@hyzyla/pdfium/dist/pdfium.wasm public/pdfium.wasm",
     "dev": "next dev",
     "build": "next build",
-    "start": "node sammy.js; serve -s _static -l tcp://0.0.0.0:${PORT:-8080} -n",
+    "start": "node sammy.js; next start -p ${PORT:-8080}",
     "lint": "eslint ."
   },
   "keywords": [],
@@ -19,13 +19,19 @@
   "packageManager": "yarn@1.22.22",
   "dependencies": {
     "@hyzyla/pdfium": "^2.1.12",
+    "@langchain/core": "^1.1.46",
+    "@langchain/google-genai": "^2.1.30",
+    "@langchain/openai": "^1.4.5",
     "@radix-ui/react-slot": "^1.2.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "deepagents": "^1.10.2",
     "eslint-config-next": "^15.4.8",
+    "langchain": "^1.4.0",
     "lucide-react": "^1.11.0",
     "next": "^15.4.10",
     "pdf-lib": "^1.17.1",
+    "pngjs": "^7.0.0",
     "radix-ui": "^1.4.3",
     "react": "^19.1.4",
     "react-dom": "^19.1.4",
@@ -36,6 +42,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.4",
     "@types/node": "^25.6.0",
+    "@types/pngjs": "^6.0.5",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "eslint": "^9",

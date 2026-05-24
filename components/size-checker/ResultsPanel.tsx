@@ -20,9 +20,11 @@ export function ResultsPanel({ result }: Props) {
   const { boxes, issues, pass } = result;
 
   const trim  = boxes.find((b) => b.name === 'TrimBox');
-  const media = boxes.find((b) => b.name === 'MediaBox')!;
-  const sizeBox = (trim?.defined ? trim : media);
-  const paperSize = detectPaperSize(ptToMm(sizeBox.width), ptToMm(sizeBox.height));
+  const media = boxes.find((b) => b.name === 'MediaBox');
+  const sizeBox = trim?.defined ? trim : media;
+  const paperSize = sizeBox
+    ? detectPaperSize(ptToMm(sizeBox.width), ptToMm(sizeBox.height))
+    : null;
 
   return (
     <div className="flex flex-col gap-6">

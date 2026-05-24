@@ -21,9 +21,11 @@ export function FileResultRow({ entry }: Props) {
 
   if (entry.status === 'done') {
     const trim  = entry.result.boxes.find((b) => b.name === 'TrimBox');
-    const media = entry.result.boxes.find((b) => b.name === 'MediaBox')!;
+    const media = entry.result.boxes.find((b) => b.name === 'MediaBox');
     const sizeBox = trim?.defined ? trim : media;
-    paperSize = detectPaperSize(ptToMm(sizeBox.width), ptToMm(sizeBox.height));
+    paperSize = sizeBox
+      ? detectPaperSize(ptToMm(sizeBox.width), ptToMm(sizeBox.height))
+      : null;
     errorCount = entry.result.issues.filter((i) => i.severity === 'error').length;
     warnCount  = entry.result.issues.filter((i) => i.severity === 'warning').length;
   }

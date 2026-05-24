@@ -3,7 +3,6 @@
 import { useState, useRef, useCallback } from 'react';
 import { FileDropZone } from '@/components/size-checker/FileDropZone';
 import { FileResultRow } from '@/components/size-checker/FileResultRow';
-import { analyzeFile } from '@/lib/pdfium/analyzer';
 import type { AnalysisResult } from '@/lib/pdfium/types';
 import type { FilePayload } from '@/components/size-checker/FileDropZone';
 
@@ -15,9 +14,6 @@ export type FileEntry =
 
 function classifyError(err: unknown): string {
   const msg = err instanceof Error ? err.message : String(err);
-  if (/wasm|fetch|network/i.test(msg)) {
-    return 'Analysis engine failed to load. Check your connection and try again.';
-  }
   if (/password|encrypt/i.test(msg)) {
     return 'This file is password-protected and cannot be analyzed.';
   }
@@ -44,13 +40,13 @@ export default function SizeCheckerPage() {
 
       setEntries((prev) => prev.map((e) =>
         e.id === item.id
-          ? { id: e.id, filename: e.filename, status: 'loading', label: 'Loading analysis engine…' }
+          ? { id: e.id, filename: e.filename, status: 'loading', label: 'Checking design fit…' }
           : e,
       ));
 
       try {
-        const { getPdfiumLibrary } = await import('@/lib/pdfium/loader');
-        await getPdfiumLibrary();
+        const formData = new FormData();
+        formData.append('file', new Blob([item.buffer]), item.filename);
 
         setEntries((prev) => prev.map((e) =>
           e.id === item.id
@@ -58,7 +54,17 @@ export default function SizeCheckerPage() {
             : e,
         ));
 
-        const result = await analyzeFile(item.buffer);
+        const response = await fetch('/api/analyze-fit', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!response.ok) {
+          const body = await response.json().catch(() => ({}));
+          throw new Error((body as { error?: string }).error ?? `Server error ${response.status}`);
+        }
+
+        const result = await response.json() as AnalysisResult;
 
         setEntries((prev) => prev.map((e) =>
           e.id === item.id

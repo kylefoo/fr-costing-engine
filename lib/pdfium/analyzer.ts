@@ -1,5 +1,6 @@
 import { PDFDocument, PDFName } from 'pdf-lib';
 import type { BoxInfo, BoxName, AnalysisIssue, AnalysisResult, RenderedPage } from './types';
+import type { PDFiumLibrary as PDFiumLibraryType } from '@hyzyla/pdfium';
 import { getPdfiumLibrary } from './loader';
 
 const TOLERANCE_PT = 1.42; // 0.5 mm in PDF points (1 pt = 0.3528 mm)
@@ -147,8 +148,9 @@ function runBoxChecks(boxes: BoxInfo[]): AnalysisIssue[] {
  */
 function runBleedCheck(rendered: RenderedPage, bleed: BoxInfo, media: BoxInfo): AnalysisIssue[] {
   if (!bleed.defined) return [];
+  if (!rendered.data) return []; // no raw bitmap available (e.g. server result with dataUrl only)
 
-  const { data, width, height, scale } = rendered;
+  const { data, width, height, scale } = rendered as Required<Pick<RenderedPage, 'data'>> & RenderedPage;
   const STRIP = 2;
 
   // Map BleedBox PDF coords → bitmap pixels
@@ -204,15 +206,22 @@ function runBleedCheck(rendered: RenderedPage, bleed: BoxInfo, media: BoxInfo): 
  * Main entry point. Loads `buffer` as a PDF/AI file, extracts boxes using
  * pdf-lib, renders page 0 via pdfium, runs both checks, returns an
  * AnalysisResult. Throws on parse failure so the caller can show an error.
+ *
+ * @param buffer - The raw PDF/AI file bytes
+ * @param getLibrary - Optional pdfium library getter; defaults to the browser
+ *   loader. Pass `getPdfiumLibraryServer` when calling from a server context.
  */
-export async function analyzeFile(buffer: ArrayBuffer): Promise<AnalysisResult> {
+export async function analyzeFile(
+  buffer: ArrayBuffer,
+  getLibrary: () => Promise<PDFiumLibraryType> = getPdfiumLibrary,
+): Promise<AnalysisResult> {
   // --- Box extraction (pdf-lib) ---
   const pdfDoc = await PDFDocument.load(buffer, { ignoreEncryption: true });
   const boxes = extractBoxes(pdfDoc);
   const boxIssues = runBoxChecks(boxes);
 
   // --- Page rendering (pdfium) ---
-  const library = await getPdfiumLibrary();
+  const library = await getLibrary();
   const document = await library.loadDocument(new Uint8Array(buffer));
   const page = document.getPage(0);
   let renderResult!: Awaited<ReturnType<typeof page.render>>;
