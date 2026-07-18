@@ -15,16 +15,14 @@ export default function Home() {
         </h2>
 
         <p className="text-muted-foreground mb-6">
-          Size checker, Color analyzer, Cost calculator, and more.
+          Size checker, Color analyzer, Ups calculator, and more.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-2">
-          <Button asChild variant="secondary">
-            <a href="#">
-              Color Analyzer (Coming soon)
-            </a>
-          </Button>
           <Button asChild>
+            <Link href="/ups-calculator">Ups Calculator</Link>
+          </Button>
+          <Button asChild variant="secondary">
             <Link href="/size-checker">Size Checker</Link>
           </Button>
         </div>

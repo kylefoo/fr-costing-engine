@@ -1,0 +1,432 @@
+{
+  "50": {
+    "perFrame1c": 1.696,
+    "perFrame2c": 1.908,
+    "perFrame3c": 2.12,
+    "perFrame4c": 2.756,
+    "perFrame5c": 3.18,
+    "perFrame6c": 4.028,
+    "perFrame7c": 4.876,
+    "perFrame8c": 6.572
+  },
+  "100": {
+    "perFrame1c": 0.954,
+    "perFrame2c": 1.06,
+    "perFrame3c": 1.272,
+    "perFrame4c": 1.59,
+    "perFrame5c": 1.908,
+    "perFrame6c": 2.332,
+    "perFrame7c": 2.756,
+    "perFrame8c": 3.71
+  },
+  "150": {
+    "perFrame1c": 0.636,
+    "perFrame2c": 0.7102,
+    "perFrame3c": 0.848,
+    "perFrame4c": 1.166,
+    "perFrame5c": 1.431,
+    "perFrame6c": 1.696,
+    "perFrame7c": 2.12,
+    "perFrame8c": 2.862
+  },
+  "200": {
+    "perFrame1c": 0.477,
+    "perFrame2c": 0.583,
+    "perFrame3c": 0.742,
+    "perFrame4c": 1.007,
+    "perFrame5c": 1.378,
+    "perFrame6c": 1.6324,
+    "perFrame7c": 2.014,
+    "perFrame8c": 2.703
+  },
+  "250": {
+    "perFrame1c": 0.424,
+    "perFrame2c": 0.5088,
+    "perFrame3c": 0.689,
+    "perFrame4c": 0.954,
+    "perFrame5c": 1.325,
+    "perFrame6c": 1.5688,
+    "perFrame7c": 1.908,
+    "perFrame8c": 2.597
+  },
+  "300": {
+    "perFrame1c": 0.38796,
+    "perFrame2c": 0.477,
+    "perFrame3c": 0.6784,
+    "perFrame4c": 0.901,
+    "perFrame5c": 1.272,
+    "perFrame6c": 1.5052,
+    "perFrame7c": 1.802,
+    "perFrame8c": 2.491
+  },
+  "350": {
+    "perFrame1c": 0.3816,
+    "perFrame2c": 0.4717,
+    "perFrame3c": 0.6731,
+    "perFrame4c": 0.848,
+    "perFrame5c": 1.219,
+    "perFrame6c": 1.4416,
+    "perFrame7c": 1.696,
+    "perFrame8c": 2.385
+  },
+  "400": {
+    "perFrame1c": 0.3763,
+    "perFrame2c": 0.4664,
+    "perFrame3c": 0.6678,
+    "perFrame4c": 0.8162,
+    "perFrame5c": 1.166,
+    "perFrame6c": 1.378,
+    "perFrame7c": 1.59,
+    "perFrame8c": 2.279
+  },
+  "450": {
+    "perFrame1c": 0.371,
+    "perFrame2c": 0.4611,
+    "perFrame3c": 0.6625,
+    "perFrame4c": 0.795,
+    "perFrame5c": 1.113,
+    "perFrame6c": 1.3144,
+    "perFrame7c": 1.484,
+    "perFrame8c": 2.173
+  },
+  "500": {
+    "perFrame1c": 0.36676,
+    "perFrame2c": 0.4558,
+    "perFrame3c": 0.6572,
+    "perFrame4c": 0.795,
+    "perFrame5c": 1.06,
+    "perFrame6c": 1.2508,
+    "perFrame7c": 1.431,
+    "perFrame8c": 2.067
+  },
+  "550": {
+    "perFrame1c": 0.3604,
+    "perFrame2c": 0.4505,
+    "perFrame3c": 0.6519,
+    "perFrame4c": 0.77857,
+    "perFrame5c": 1.0282,
+    "perFrame6c": 1.2296,
+    "perFrame7c": 1.3992,
+    "perFrame8c": 2.014
+  },
+  "600": {
+    "perFrame1c": 0.3551,
+    "perFrame2c": 0.4452,
+    "perFrame3c": 0.6466,
+    "perFrame4c": 0.7632,
+    "perFrame5c": 0.9964,
+    "perFrame6c": 1.2084,
+    "perFrame7c": 1.3674,
+    "perFrame8c": 1.961
+  },
+  "650": {
+    "perFrame1c": 0.3498,
+    "perFrame2c": 0.4399,
+    "perFrame3c": 0.6413,
+    "perFrame4c": 0.746876,
+    "perFrame5c": 0.9646,
+    "perFrame6c": 1.1872,
+    "perFrame7c": 1.3356,
+    "perFrame8c": 1.908
+  },
+  "700": {
+    "perFrame1c": 0.3445,
+    "perFrame2c": 0.4346,
+    "perFrame3c": 0.636,
+    "perFrame4c": 0.7314,
+    "perFrame5c": 0.9328,
+    "perFrame6c": 1.166,
+    "perFrame7c": 1.3038,
+    "perFrame8c": 1.855
+  },
+  "750": {
+    "perFrame1c": 0.3392,
+    "perFrame2c": 0.4293,
+    "perFrame3c": 0.6307,
+    "perFrame4c": 0.715076,
+    "perFrame5c": 0.901,
+    "perFrame6c": 1.1448,
+    "perFrame7c": 1.272,
+    "perFrame8c": 1.802
+  },
+  "800": {
+    "perFrame1c": 0.3339,
+    "perFrame2c": 0.424,
+    "perFrame3c": 0.6254,
+    "perFrame4c": 0.6996,
+    "perFrame5c": 0.8904,
+    "perFrame6c": 1.1236,
+    "perFrame7c": 1.2508,
+    "perFrame8c": 1.749
+  },
+  "850": {
+    "perFrame1c": 0.3286,
+    "perFrame2c": 0.4187,
+    "perFrame3c": 0.6201,
+    "perFrame4c": 0.6837,
+    "perFrame5c": 0.8798,
+    "perFrame6c": 1.1024,
+    "perFrame7c": 1.2296,
+    "perFrame8c": 1.696
+  },
+  "900": {
+    "perFrame1c": 0.3233,
+    "perFrame2c": 0.4134,
+    "perFrame3c": 0.6148,
+    "perFrame4c": 0.6678,
+    "perFrame5c": 0.8692,
+    "perFrame6c": 1.0812,
+    "perFrame7c": 1.2084,
+    "perFrame8c": 1.643
+  },
+  "950": {
+    "perFrame1c": 0.318,
+    "perFrame2c": 0.4081,
+    "perFrame3c": 0.6095,
+    "perFrame4c": 0.6519,
+    "perFrame5c": 0.8586,
+    "perFrame6c": 1.06,
+    "perFrame7c": 1.1872,
+    "perFrame8c": 1.59
+  },
+  "1000": {
+    "perFrame1c": 0.3127,
+    "perFrame2c": 0.4028,
+    "perFrame3c": 0.6042,
+    "perFrame4c": 0.636,
+    "perFrame5c": 0.848,
+    "perFrame6c": 1.0388,
+    "perFrame7c": 1.166,
+    "perFrame8c": 1.537
+  },
+  "1050": {
+    "perFrame1c": 0.3074,
+    "perFrame2c": 0.3975,
+    "perFrame3c": 0.5989,
+    "perFrame4c": 0.6307,
+    "perFrame5c": 0.8374,
+    "perFrame6c": 1.0282,
+    "perFrame7c": 1.1554,
+    "perFrame8c": 1.5052
+  },
+  "1100": {
+    "perFrame1c": 0.3021,
+    "perFrame2c": 0.3922,
+    "perFrame3c": 0.5936,
+    "perFrame4c": 0.6254,
+    "perFrame5c": 0.8321,
+    "perFrame6c": 1.0176,
+    "perFrame7c": 1.1448,
+    "perFrame8c": 1.4734
+  },
+  "1150": {
+    "perFrame1c": 0.2968,
+    "perFrame2c": 0.3869,
+    "perFrame3c": 0.5883,
+    "perFrame4c": 0.6201,
+    "perFrame5c": 0.8268,
+    "perFrame6c": 1.007,
+    "perFrame7c": 1.1342,
+    "perFrame8c": 1.4416
+  },
+  "1200": {
+    "perFrame1c": 0.2915,
+    "perFrame2c": 0.3816,
+    "perFrame3c": 0.583,
+    "perFrame4c": 0.6148,
+    "perFrame5c": 0.8215,
+    "perFrame6c": 0.9964,
+    "perFrame7c": 1.1236,
+    "perFrame8c": 1.4098
+  },
+  "1250": {
+    "perFrame1c": 0.2862,
+    "perFrame2c": 0.3763,
+    "perFrame3c": 0.5777,
+    "perFrame4c": 0.6095,
+    "perFrame5c": 0.8162,
+    "perFrame6c": 0.9858,
+    "perFrame7c": 1.113,
+    "perFrame8c": 1.378
+  },
+  "1300": {
+    "perFrame1c": 0.2809,
+    "perFrame2c": 0.371,
+    "perFrame3c": 0.5724,
+    "perFrame4c": 0.6042,
+    "perFrame5c": 0.8109,
+    "perFrame6c": 0.9752,
+    "perFrame7c": 1.1024,
+    "perFrame8c": 1.3462
+  },
+  "1350": {
+    "perFrame1c": 0.2756,
+    "perFrame2c": 0.3657,
+    "perFrame3c": 0.5671,
+    "perFrame4c": 0.5989,
+    "perFrame5c": 0.8056,
+    "perFrame6c": 0.9646,
+    "perFrame7c": 1.0918,
+    "perFrame8c": 1.3144
+  },
+  "1400": {
+    "perFrame1c": 0.2703,
+    "perFrame2c": 0.3604,
+    "perFrame3c": 0.5618,
+    "perFrame4c": 0.5936,
+    "perFrame5c": 0.8003,
+    "perFrame6c": 0.954,
+    "perFrame7c": 1.0812,
+    "perFrame8c": 1.2826
+  },
+  "1450": {
+    "perFrame1c": 0.265,
+    "perFrame2c": 0.3551,
+    "perFrame3c": 0.5565,
+    "perFrame4c": 0.5883,
+    "perFrame5c": 0.795,
+    "perFrame6c": 0.9434,
+    "perFrame7c": 1.06,
+    "perFrame8c": 1.2508
+  },
+  "1500": {
+    "perFrame1c": 0.2597,
+    "perFrame2c": 0.3498,
+    "perFrame3c": 0.5512,
+    "perFrame4c": 0.583,
+    "perFrame5c": 0.7897,
+    "perFrame6c": 0.9328,
+    "perFrame7c": 1.0494,
+    "perFrame8c": 1.219
+  },
+  "1550": {
+    "perFrame1c": 0.2544,
+    "perFrame2c": 0.3445,
+    "perFrame3c": 0.5459,
+    "perFrame4c": 0.5777,
+    "perFrame5c": 0.7844,
+    "perFrame6c": 0.9222,
+    "perFrame7c": 1.0441,
+    "perFrame8c": 1.2084
+  },
+  "1600": {
+    "perFrame1c": 0.2491,
+    "perFrame2c": 0.3392,
+    "perFrame3c": 0.5406,
+    "perFrame4c": 0.5353,
+    "perFrame5c": 0.7791,
+    "perFrame6c": 0.9116,
+    "perFrame7c": 1.0388,
+    "perFrame8c": 1.1978
+  },
+  "1650": {
+    "perFrame1c": 0.2438,
+    "perFrame2c": 0.3339,
+    "perFrame3c": 0.5353,
+    "perFrame4c": 0.5671,
+    "perFrame5c": 0.7738,
+    "perFrame6c": 0.901,
+    "perFrame7c": 1.0335,
+    "perFrame8c": 1.1872
+  },
+  "1700": {
+    "perFrame1c": 0.2385,
+    "perFrame2c": 0.3286,
+    "perFrame3c": 0.53,
+    "perFrame4c": 0.5618,
+    "perFrame5c": 0.7685,
+    "perFrame6c": 0.8904,
+    "perFrame7c": 1.0282,
+    "perFrame8c": 1.1766
+  },
+  "1750": {
+    "perFrame1c": 0.2332,
+    "perFrame2c": 0.3233,
+    "perFrame3c": 0.5247,
+    "perFrame4c": 0.5565,
+    "perFrame5c": 0.7632,
+    "perFrame6c": 0.8798,
+    "perFrame7c": 1.0229,
+    "perFrame8c": 1.166
+  },
+  "1800": {
+    "perFrame1c": 0.2279,
+    "perFrame2c": 0.318,
+    "perFrame3c": 0.5194,
+    "perFrame4c": 0.5512,
+    "perFrame5c": 0.7579,
+    "perFrame6c": 0.8692,
+    "perFrame7c": 1.0176,
+    "perFrame8c": 1.1554
+  },
+  "1850": {
+    "perFrame1c": 0.2226,
+    "perFrame2c": 0.3127,
+    "perFrame3c": 0.5141,
+    "perFrame4c": 0.5459,
+    "perFrame5c": 0.7526,
+    "perFrame6c": 0.8586,
+    "perFrame7c": 1.0123,
+    "perFrame8c": 1.1448
+  },
+  "1900": {
+    "perFrame1c": 0.2173,
+    "perFrame2c": 0.3074,
+    "perFrame3c": 0.5088,
+    "perFrame4c": 0.5406,
+    "perFrame5c": 0.7473,
+    "perFrame6c": 0.848,
+    "perFrame7c": 1.007,
+    "perFrame8c": 1.1342
+  },
+  "1950": {
+    "perFrame1c": 0.212,
+    "perFrame2c": 0.3021,
+    "perFrame3c": 0.5035,
+    "perFrame4c": 0.5353,
+    "perFrame5c": 0.742,
+    "perFrame6c": 0.8374,
+    "perFrame7c": 1.0017,
+    "perFrame8c": 1.1236
+  },
+  "2000": {
+    "perFrame1c": 0.212,
+    "perFrame2c": 0.2968,
+    "perFrame3c": 0.4982,
+    "perFrame4c": 0.53,
+    "perFrame5c": 0.7367,
+    "perFrame6c": 0.8268,
+    "perFrame7c": 0.9964,
+    "perFrame8c": 1.113
+  },
+  "ABOVE 2001": {
+    "perFrame1c": 0.212,
+    "perFrame2c": 0.2968,
+    "perFrame3c": 0.4982,
+    "perFrame4c": 0.53,
+    "perFrame5c": 0.7367,
+    "perFrame6c": 0.8268,
+    "perFrame7c": 0.9964,
+    "perFrame8c": 1.113
+  },
+  "ABOVE 5001": {
+    "perFrame1c": 0.212,
+    "perFrame2c": 0.2968,
+    "perFrame3c": 0.4982,
+    "perFrame4c": 0.53,
+    "perFrame5c": 0.7367,
+    "perFrame6c": 0.8268,
+    "perFrame7c": 0.9964,
+    "perFrame8c": 1.113
+  },
+  "ABOVE 10001": {
+    "perFrame1c": 0.212,
+    "perFrame2c": 0.2968,
+    "perFrame3c": 0.4982,
+    "perFrame4c": 0.53,
+    "perFrame5c": 0.7367,
+    "perFrame6c": 0.8268,
+    "perFrame7c": 0.9964,
+    "perFrame8c": 1.113
+  }
+}
